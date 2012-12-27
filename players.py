@@ -34,52 +34,62 @@ class ConstantPlayer(RandomPlayer):
     def chooseLetter(self, grid):
         return self.letter
 
-class BasicPlayer(RandomPlayer):
+class BasicPlayer(object):
+    def __init__(self, name):
+        self.name = name
+        self.remaining_words = '\n'.join(dictionary) 
+
+    def scorePosition(self, gGrid):
+        scoring_words = []
+        for i in range(0,grid_size*2):
+            letters = gGrid.getLetters(i)
+            possible_words = gGrid.getPossibleWords(letters)
+            possible_words = [w for w in possible_words if null_char in w]
+            # this approach is flawed in the sense that not all the possibilities can simultaneously be made
+            possibilities = []
+            for possible_word in possible_words:
+                rx = re.compile(possible_word.replace(null_char, '\\w'))
+                matches = rx.findall(self.remaining_words)
+                if matches:
+                    longest_match = max(matches, key=len)
+                    if type(longest_match) is list:
+                        longest_match = random.choice(longest_match)
+                    possibilities.append(longest_match)
+            if possibilities:
+                longest_word = max(possibilities, key=len)
+                if type(longest_word) is list:
+                    longest_word = random.choice(longest_word)
+                scoring_words.append(longest_word)
+        
+        score = sum([len(x) for x in scoring_words])
+        return score
+
+    def chooseLetter(self, grid):
+        # do the same as placeLetter, except instead of working on all possible grids with
+        # the placing letter filled, we work on the actual grid, choosing the highest
+        # possible scoring word
+        gGrid = Grid()
+        gGrid.grid = grid.grid
+        
+        for i in range(0,grid_size*2):
+            letters = gGrid.getLetters(i)
+            possible_words = gGrid.getPossibleWords(letters)
+            possible_words = [w for w in possible_words if null_char in w]
+            # this approach is flawed in the sense that not all the possibilities can simultaneously be made
+            for possible_word in possible_words:
+                rx = re.compile(possible_word.replace(null_char, '\\w'))
+                matches = rx.findall(self.remaining_words)
+                if matches:
+                    match = max(matches, key=len)
+                    matched_word = random.choice([m for m in matches if len(m) == len(match)])
+                    return matched_word[possible_word.index(null_char)]
+
     def placeLetter(self, grid, letter):
         # construct a regex from the current grid to find dictionary words which could fit
         # select a coord which minimises the number of decreases in word matches in all 10
         # dimensions (max 10 * 25 * 4 possibilities to check)
-        
         gGrid = Grid()
         gGrid.grid = grid.grid
-
-        all_words = '\n'.join(dictionary)
-
-        def scorePosition():
-            scoring_words = []
-            for i in range(0,grid_size*2):
-                letters = gGrid.getLetters(i)
-                possible_words = gGrid.getPossibleWords(letters)
-                possible_words = [w.replace(null_char, '\\w') for w in possible_words if null_char in w]
-                # print "Regexes:",possible_words
-                
-                # we now have the complete list of words we could make with our remaining placings
-                # pick the longest to score the position
-                # this approach is flawed in the sense that not all the possibilities can simultaneously be made
-        
-                possibilities = []
-                for possible_word in possible_words:
-                    rx = re.compile(possible_word)
-                    matches = rx.findall(all_words)
-                    #print "Words:", matches
-                    if matches:
-                        longest_match = max(matches, key=len)
-                        if type(longest_match) is list:
-                            longest_match = random.choice(longest_match)
-                        #print "scored word"
-                        #print longest_match
-                        possibilities.append(longest_match)
-                if possibilities:
-                    longest_word = max(possibilities, key=len)
-                    if type(longest_word) is list:
-                        longest_word = random.choice(longest_word)
-                    scoring_words.append(longest_word)
-
-            #print "Scoring Words"
-            #print scoring_words
-            score = sum([len(x) for x in scoring_words])
-            #print score
-            return score
 
         # try placing letter at each available grid position
         # score the position and store
@@ -88,17 +98,20 @@ class BasicPlayer(RandomPlayer):
             for j in range(0,5):
                 if gGrid.getLetter(i,j) == null_char:
                     gGrid.grid[j * grid_size + i] = letter
-                    scores.append((i,j, scorePosition()))
+                    scores.append((i,j, self.scorePosition(gGrid)))
                     gGrid.grid[j * grid_size + i] = null_char
             
         # submit the highest scoring position
-        print "Possible scores"
+        print "Possible scores:"
         print scores
-        best_score = max(scores, lambda s: s[2])
-        if type(best_score) is list:
-            best_score = random.choice(best_score)
-        print "Best potential grid score:", best_score
-        return (best_score[0], best_score[1])
+        best_score = max(scores, key=lambda s: s[2])
+        #if type(best_score) is list:
+        #    print "Picking random choice from best scores"
+        #    best_score = random.choice(best_score)
+        choice = random.choice([x for x in scores if x[2] == best_score[2]])
+        print "Best potential grid score:", choice
+
+        return (choice[0], choice[1])
 
 def testBasicPlayer():
     player = BasicPlayer("test")
@@ -111,7 +124,7 @@ def testBasicPlayer():
     coords = player.placeLetter(grid, 'a')
     print "Player chose coords:", coords
     grid.setLetter(coords[0], coords[1], 'a')
-    grid.printGrid()
+    print grid 
 
 class HumanPlayer(object):
     def getInput(func):
@@ -124,7 +137,7 @@ class HumanPlayer(object):
     def chooseLetter(self, grid):
         def promptForLetter():
             print "Current crossword:"
-            grid.printGrid()
+            print grid 
             print "Enter the letter you would like to add:"
             letter = ''
             while len(letter) != 1 or letter not in string.letters:
@@ -145,6 +158,6 @@ class HumanPlayer(object):
             return (x,y)
        
         print "Current crossword:"
-        grid.printGrid()
+        print grid 
         return getInput(promptForCoords)
 

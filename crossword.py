@@ -20,10 +20,8 @@ class InputError(Exception):
         return self.msg
 
 class BaseGrid(object):
-
     def __init__(self):
         self.grid = [0] * grid_size * grid_size
-
     def __init__(self, grid):
         self.grid = list(grid.grid)
 
@@ -32,9 +30,8 @@ class BaseGrid(object):
         return self.grid[col * grid_size + row]
 
     # prints the grid
-    def printGrid(self):
-        for i in range(5,10):
-            print self.getLetters(i)
+    def __str__(self):
+        return '\n'.join([''.join(self.getLetters(i)) for i in range(grid_size,grid_size*2)])
 
 class Grid(BaseGrid): 
     def __init__(self):
@@ -92,7 +89,7 @@ class Player(object):
         self.grid = Grid()
 
     def chooseLetter(self):
-        return self.personality.chooseLetter(BaseGrid(self.grid))
+        return self.personality.chooseLetter(BaseGrid(self.grid)).lower()
 
     def placeLetter(self, letter):
         data = self.personality.placeLetter(BaseGrid(self.grid), letter)
@@ -106,6 +103,7 @@ class Player(object):
 
 def playGame(player_personalities):
     players = [Player(p) for p in player_personalities]
+
     def completeGame():
         for player in players:
             # take last turn
@@ -114,6 +112,7 @@ def playGame(player_personalities):
 
         for player in players:
             # summarise game
+            print player.grid
             scoring_words = player.grid.getScoringWords()
             print player.name(), "words:"
             print ', '.join(["%s %x" % (w, len(w)) for w in scoring_words])
@@ -121,7 +120,7 @@ def playGame(player_personalities):
 
         leaderboard = sorted(players, key=lambda player: player.score, reverse=True)
         print "Scoreboard:"
-        print '\n'.join(["%s - %x" % (l.name(), l.score) for l in leaderboard])
+        print '\n'.join(["%s - %d" % (l.name(), l.score) for l in leaderboard])
         return leaderboard
 
     for player in players:
@@ -130,6 +129,7 @@ def playGame(player_personalities):
     turn = 0
     while True: 
         for player in players:
+            print "# Turn", turn
             if turn >= grid_size * grid_size - 1:
                 return completeGame()
             turn += 1
@@ -138,6 +138,6 @@ def playGame(player_personalities):
 
             for player in players:  
                 player.placeLetter(letter)
-                player.grid.printGrid()
+                print player.grid
 
 

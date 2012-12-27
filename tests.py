@@ -2,16 +2,22 @@ from players import *
 from crossword import *
 
 
+#def testGame():
+#   player1 = RandomPlayer("Guy")
+#    player2 = RandomPlayer("Kim")
+#    player3 = ConstantPlayer("James", "Z")
+#    players = [player1, player2, player3]
+#    return playGame(players)
+
 def testGame():
-    player1 = RandomPlayer("Guy")
-    player2 = RandomPlayer("Kim")
-    player3 = ConstantPlayer("James", "Z")
-    players = [player1, player2, player3]
+    player1 = BasicPlayer("Guy")
+    player2 = ConstantPlayer("Kim", "e")
+    players = [player1, player2]
     return playGame(players)
 
 def main():
-    players = [RandomPlayer(str(i)) for i in range(1,4)]
-    players.append(BasicPlayer("basic"))
+    players = [BasicPlayer(str(i)) for i in range(1,5)]
+    #    players.append(BasicPlayer("basic"))
     games = []
     for i in range(0, 1):
         games.append(playGame(players))
