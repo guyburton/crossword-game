@@ -7,6 +7,7 @@ def getDictionaryWords():
 
 # the size of the crossword grid
 grid_size = 5
+null_char = '.'
 dictionary = getDictionaryWords()
 
 print "Loaded ", len(dictionary), " dictionary words"
@@ -19,6 +20,7 @@ class InputError(Exception):
         return self.msg
 
 class BaseGrid(object):
+
     def __init__(self):
         self.grid = [0] * grid_size * grid_size
 
@@ -36,7 +38,7 @@ class BaseGrid(object):
 
 class Grid(BaseGrid): 
     def __init__(self):
-        self.grid = [0] * grid_size * grid_size
+        self.grid = [null_char] * grid_size * grid_size
 
     # sets the letter at the specified location
     def setLetter(self, row, col, letter):
@@ -44,10 +46,10 @@ class Grid(BaseGrid):
             raise InputError("Row out of bounds: %x" % row)
         if col < 0 or col > 4:
             raise InputError("Col out of bounds: %x" % col)
-        if self.getLetter(row, col) != 0:
+        if self.getLetter(row, col) != null_char:
             raise InputError("Square already populated (%x,%x) = %s" % (row, col, self.getLetter(row, col))) 
         self.grid[col * grid_size + row] = letter
-
+    
     # returns the 5 letters at the specified starting position
     # 0-4 are the horizontal words from the top
     # 5-9 are the vertical words from the left
@@ -56,21 +58,24 @@ class Grid(BaseGrid):
             return self.grid[i * grid_size : i * grid_size + grid_size]
         return [self.getLetter(i-5, j) for j in range(0, 5)] 
 
-    # returns a list of words from within the set of letters that are in the dictionary
-    def getWords(self, letters):
+    def getPossibleWords(self, letters):
         words = []
         words.append(letters)
         words.append(letters[1:5])
         words.append(letters[2:5])
         words.append(letters[0:4])
         words.append(letters[0:3])
-        words = [''.join(w) for w in words]
+        return [''.join(w) for w in words]
+
+    # returns a list of words from within the set of letters that are in the dictionary
+    def getWords(self, letters):
+        words = self.getPossibleWords(letters)
         return [w for w in words if w in dictionary]
 
     # returns a list of scoring words from the Grid
     def getScoringWords(self):
         scoring_words = []
-        for i in range(0,9):
+        for i in range(0, grid_size * 2):
             letters = self.getLetters(i)
             words = self.getWords(letters)
             if words:
@@ -91,7 +96,10 @@ class Player(object):
 
     def placeLetter(self, letter):
         data = self.personality.placeLetter(BaseGrid(self.grid), letter)
-        self.grid.setLetter(data[0], data[1], data[2])
+        if (self.grid.getLetter(data[0], data[1]) != null_char):
+            raise InputException("Cannot place letter at %x,%x" % data)
+        print self.name(), 'placed', letter, 'at', data
+        self.grid.setLetter(data[0], data[1], letter)
 
     def name(self):
         return self.personality.name
@@ -104,13 +112,16 @@ def playGame(player_personalities):
             letter = player.chooseLetter()
             player.placeLetter(letter)
 
+        for player in players:
             # summarise game
             scoring_words = player.grid.getScoringWords()
+            print player.name(), "words:"
+            print ', '.join(["%s %x" % (w, len(w)) for w in scoring_words])
             player.score = sum([len(x) for x in scoring_words])
 
         leaderboard = sorted(players, key=lambda player: player.score, reverse=True)
-#        print "Scoreboard:"
-#       print '\n'.join(["%s - %x" % (l.name(), l.score) for l in leaderboard])
+        print "Scoreboard:"
+        print '\n'.join(["%s - %x" % (l.name(), l.score) for l in leaderboard])
         return leaderboard
 
     for player in players:
@@ -123,8 +134,10 @@ def playGame(player_personalities):
                 return completeGame()
             turn += 1
             letter = player.chooseLetter()
+            print player.name(), "chose", letter
 
             for player in players:  
                 player.placeLetter(letter)
+                player.grid.printGrid()
 
 
