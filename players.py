@@ -115,54 +115,21 @@ class BasicPlayer(object):
                 logger.debug("Lines %s %s" % (horizontal_word, vertical_word))
                 original_score = (self.scoreLine(horizontal_word), self.scoreLine(vertical_word))
                 logger.debug("Original Score (%s, %s): %s" % (''.join(horizontal_word), ''.join(vertical_word), str(original_score)))
-                
-                for letter in range(ord('a'), ord('z')+1):
-                    horizontal_word[col] = chr(letter)
-                    vertical_word[row] = chr(letter)
+            
+                letters = range(ord('a'), ord('z')+1)
+                while len(letters) > 0:
+                    letter = chr(random.choice(letters))
+                    letters.remove(ord(letter))
+                    horizontal_word[col] = letter
+                    vertical_word[row] = letter
                     new_score = (self.scoreLine(horizontal_word), self.scoreLine(vertical_word))
                     logger.debug("New Score (%s, %s): %s" % (''.join(horizontal_word), ''.join(vertical_word), str(new_score)))
 
                     if original_score == new_score:
-                        return chr(letter)
+                        return letter
 
-                    possible_moves.append((chr(letter), (original_score[0] - new_score[0], original_score[1] - new_score[1])))
+                    possible_moves.append((letter, (original_score[0] - new_score[0], original_score[1] - new_score[1])))
         
         best_move = max(possible_moves, key=lambda s: s[1][0] + s[1][1])
         print best_move
         return best_move[0]
-
-class HumanPlayer(object):
-    def getInput(func):
-        while True:
-            try:
-                return func()
-            except InputError as e:
-                print "Error in input:", e
-
-    def chooseLetter(self, grid):
-        def promptForLetter():
-            print "Current crossword:"
-            print grid 
-            print "Enter the letter you would like to add:"
-            letter = ''
-            while len(letter) != 1 or letter not in string.letters:
-                letter = raw_input()
-            return letter
-        return getInput(promptForLetter)
-
-    def placeLetter(self, letter):
-        def promptForCoords():
-            rx = re.compile('(\d),(\d)')
-            match = None
-            while not match:
-                print "Enter the grid location you would like to add it x,y:"
-                coords = raw_input()
-                match = rx.match(coords)
-            x = int(match.group(1)) - 1
-            y = int(match.group(2)) - 1
-            return (x,y)
-       
-        print "Current crossword:"
-        print grid 
-        return getInput(promptForCoords)
-
