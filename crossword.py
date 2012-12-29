@@ -33,6 +33,15 @@ class BaseGrid(object):
     def __str__(self):
         return '\n'.join([''.join(self.getLetters(i)) for i in range(grid_size,grid_size*2)])
 
+def getPossibleWords(letters):
+    words = []
+    words.append(letters)
+    words.append(letters[1:5])
+    words.append(letters[2:5])
+    words.append(letters[0:4])
+    words.append(letters[0:3])
+    return [''.join(w) for w in words]
+
 class Grid(BaseGrid): 
     def __init__(self):
         self.grid = [null_char] * grid_size * grid_size
@@ -55,18 +64,10 @@ class Grid(BaseGrid):
             return self.grid[i * grid_size : i * grid_size + grid_size]
         return [self.getLetter(i-5, j) for j in range(0, 5)] 
 
-    def getPossibleWords(self, letters):
-        words = []
-        words.append(letters)
-        words.append(letters[1:5])
-        words.append(letters[2:5])
-        words.append(letters[0:4])
-        words.append(letters[0:3])
-        return [''.join(w) for w in words]
 
     # returns a list of words from within the set of letters that are in the dictionary
     def getWords(self, letters):
-        words = self.getPossibleWords(letters)
+        words = getPossibleWords(letters)
         return [w for w in words if w in dictionary]
 
     # returns a list of scoring words from the Grid
