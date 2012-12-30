@@ -31,7 +31,7 @@ class BaseGrid(object):
 
     # prints the grid
     def __str__(self):
-        return '\n'.join([''.join(self.getLetters(i)) for i in range(grid_size,grid_size*2)])
+        return '\n'.join([''.join(getLetters(self, i)) for i in range(grid_size,grid_size*2)])
 
 def getPossibleWords(letters):
     words = []
@@ -41,6 +41,14 @@ def getPossibleWords(letters):
     words.append(letters[0:4])
     words.append(letters[0:3])
     return [''.join(w) for w in words]
+
+# returns the 5 letters at the specified starting position
+# 0-4 are the horizontal words from the top
+# 5-9 are the vertical words from the left
+def getLetters(grid, i):
+    if i < 5:
+        return grid.grid[i * grid_size : i * grid_size + grid_size]
+    return [grid.getLetter(i-5, j) for j in range(0, 5)] 
 
 class Grid(BaseGrid): 
     def __init__(self):
@@ -56,14 +64,6 @@ class Grid(BaseGrid):
             raise InputError("Square already populated (%x,%x) = %s" % (row, col, self.getLetter(row, col))) 
         self.grid[col * grid_size + row] = letter
     
-    # returns the 5 letters at the specified starting position
-    # 0-4 are the horizontal words from the top
-    # 5-9 are the vertical words from the left
-    def getLetters(self, i):
-        if i < 5:
-            return self.grid[i * grid_size : i * grid_size + grid_size]
-        return [self.getLetter(i-5, j) for j in range(0, 5)] 
-
 
     # returns a list of words from within the set of letters that are in the dictionary
     def getWords(self, letters):
@@ -74,7 +74,7 @@ class Grid(BaseGrid):
     def getScoringWords(self):
         scoring_words = []
         for i in range(0, grid_size * 2):
-            letters = self.getLetters(i)
+            letters = getLetters(self, i)
             words = self.getWords(letters)
             if words:
                 longest_word = max(words, key=len)
