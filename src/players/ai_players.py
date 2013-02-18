@@ -78,8 +78,6 @@ def scoreLine(line):
         decision_log.debug('Found cached result for ' + all_words + ' ' + str(rx_cache[all_words]))
         return rx_cache[all_words]
     for word in getPossibleWordsFromLetterLine(line):
-        #if word.count(null_char) != len(word) and len(word) < grid_size:
-        #    continue
         matches = findAllPossibleWordsForLine(word)
         if matches:
             max_score = len(max(matches, key=len))
