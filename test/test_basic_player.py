@@ -4,9 +4,12 @@ import crossword
 from grid import Grid
 import main_game
 from players.ai_players import BasicPlayer, findAllPossibleWordsForLine, rx_cache
+import players
 import config
 from test_utils import setWholeGrid
 import logging
+
+players.ai_players.randomness = 0
 
 logger = logging.getLogger('players')
 logger.setLevel(logging.DEBUG)

@@ -22,10 +22,10 @@ def testReasonableLettersRandomPlayer():
     crossword.loadDictionary()
     player3 = ReasonableLettersRandomPlayer("Scott")
     letters = dict([(chr(c),0) for c in range(ord('a'), ord('z')+1)])
-    for i in range(0,1000):
+    for i in range(0, 1000):
         letters[player3.chooseLetter(Grid())] += 1
         
     distribution = letters.items()
     distribution.sort()
     print distribution
-    assert False
+    ## TODO assert something sensible
