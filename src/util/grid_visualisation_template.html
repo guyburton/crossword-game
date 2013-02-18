@@ -1,0 +1,81 @@
+<html>
+    <head>
+        <style>
+body {
+    font-family: helvetica; 
+}
+.gridLine {
+    border: 1px solid #ccc;
+    border-width: 1px 0 0 1px;
+    width:150px;
+    height:150px;
+}
+
+.gridLine div {
+    border: 1px solid #ccc;
+    border-width: 0 1px 1px 0;
+    float: left;
+}
+
+.cell {
+    height: 29px;
+    width: 29px;
+    text-align: center;
+    padding: 0px;
+}
+
+.cellText {
+    margin-top:0.4em;
+    
+}
+
+.grid {
+    width:150px;
+    height:150px;
+    margin-top: 5px;
+    margin-right: 5px;
+    float: left;
+}
+        </style>
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"> </script>
+
+        <script> 
+function fillWithGrid(container, size) {
+    var ratioW = Math.floor(container.width()/size),
+        ratioH = Math.floor(container.height()/size);
+
+    var parent = $('<div />', {
+        class: 'gridLine',
+    }).addClass('gridLine').appendTo(container);
+
+    for (var i = 0; i < ratioH; i++) {
+        for(var p = 0; p < ratioW; p++){
+            
+            $('<div />', {
+                class: 'cell',
+                style : 'background: hsla(' + 255*p/ratioW + ', 100%, 50%, 1.0)'
+            }).append('<p class="cellText">G</p>').appendTo(parent);
+        }
+    }
+}
+
+function createGrid(px_size, grid_size) {
+    var grid = $('<div />', {
+        class: 'grid',
+    }).appendTo('body');
+
+    fillWithGrid(grid, px_size/grid_size);
+}
+$().ready(function() {
+    for (var i=0; i<10; i++) {    
+        createGrid(150, 5); 
+    }
+} );
+        </script>
+    </head>
+    
+    <body>
+        <div id="grid0" />
+    </body>
+</html>

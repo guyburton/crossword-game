@@ -213,7 +213,6 @@ anon
 ant
 ante
 antes
-anti-
 antic
 ants
 anus
@@ -242,7 +241,6 @@ apter
 aptly
 arc
 arch
-arch-
 arcs
 are
 area
@@ -322,7 +320,6 @@ aura
 aural
 auras
 auto
-auto-
 autos
 avail
 avast
@@ -482,7 +479,6 @@ bay
 bayed
 bayou
 bays
-be-
 beach
 bead
 beads
@@ -570,7 +566,6 @@ bevy
 bey
 beys
 bhang
-bi-
 bias
 bib
 bibs
@@ -708,7 +703,6 @@ bolts
 bomb
 bombs
 bond
-bond-
 bonds
 bone
 boned
@@ -1118,7 +1112,6 @@ cider
 cif
 cigar
 cinch
-cine-
 circa
 cissy
 cite
@@ -1190,9 +1183,6 @@ clues
 clump
 clung
 clunk
-co-
-co-ed
-co-op
 coach
 coal
 coals
@@ -1542,9 +1532,7 @@ debt
 debts
 debug
 debut
-deca-
 decay
-deci-
 deck
 decks
 decoy
@@ -2005,7 +1993,6 @@ erupt
 espy
 essay
 essay
-et al
 eta
 etc
 etch
@@ -2030,7 +2017,6 @@ ewe
 ewer
 ewers
 ewes
-ex-
 exact
 exalt
 exam
@@ -2547,7 +2533,6 @@ gens
 gent
 gents
 genus
-geo-
 germ
 germs
 get
@@ -2630,7 +2615,6 @@ gnaws
 gnome
 gnu
 gnus
-go-by
 goad
 goads
 goal
@@ -2942,7 +2926,6 @@ hewer
 hewn
 hews
 hey
-hi-fi
 hick
 hicks
 hid
@@ -3388,7 +3371,6 @@ kills
 kiln
 kilns
 kilo
-kilo-
 kilos
 kilt
 kilts
@@ -3941,7 +3923,6 @@ mavis
 maw
 maws
 max
-maxi-
 maxim
 may
 maybe
@@ -4038,7 +4019,6 @@ mined
 miner
 mines
 mingy
-mini-
 minim
 mink
 minks
@@ -4264,7 +4244,6 @@ needs
 needy
 negus
 neigh
-neo-
 neon
 nerve
 nervy
@@ -4313,7 +4292,6 @@ nit
 nitre
 nits
 nix
-no-go
 nob
 noble
 nobly
@@ -4326,8 +4304,6 @@ nohow
 noise
 noisy
 nomad
-non-
-non-U
 nonce
 none
 nook
@@ -4443,7 +4419,6 @@ omen
 omens
 omit
 omits
-on to
 once
 one
 ones
@@ -4512,7 +4487,6 @@ ovary
 oven
 ovens
 over
-over-
 overs
 overt
 ovoid
@@ -4573,7 +4547,6 @@ palmy
 pals
 palsy
 pan
-pan-
 panda
 pane
 panel
@@ -4907,7 +4880,6 @@ posh
 posit
 posse
 post
-post-
 posts
 posy
 pot
@@ -4930,7 +4902,6 @@ prate
 prawn
 pray
 prays
-pre-
 preen
 prep
 preps
@@ -4957,7 +4928,6 @@ prism
 privy
 prize
 pro
-pro-
 probe
 prod
 prods
@@ -5190,7 +5160,6 @@ raze
 razed
 razes
 razor
-re-
 reach
 react
 read
@@ -5652,11 +5621,9 @@ sees
 seine
 seize
 self
-self-
 sell
 sells
 semen
-semi-
 send
 sends
 senna
@@ -6006,7 +5973,6 @@ snubs
 snuff
 snug
 snugs
-so-so
 soak
 soaks
 soap
@@ -6219,7 +6185,6 @@ stele
 stem
 stems
 step
-step-
 steps
 stern
 stet
@@ -6286,7 +6251,6 @@ styes
 style
 suave
 sub
-sub-
 subs
 such
 suck
@@ -6383,7 +6347,6 @@ swung
 sylph
 synod
 syrup
-ta ta
 tab
 tabby
 table
@@ -6642,7 +6605,6 @@ tithe
 title
 tits
 tizzy
-to-do
 toad
 toads
 toady
@@ -6759,7 +6721,6 @@ treks
 trend
 tress
 trews
-tri-
 triad
 trial
 tribe
@@ -6885,7 +6846,6 @@ ulcer
 ulna
 ulnae
 umber
-un-
 unbar
 uncle
 unco
@@ -6911,7 +6871,6 @@ until
 unto
 unwed
 unzip
-up-
 upon
 upped
 upper
@@ -7006,7 +6965,6 @@ vials
 vibes
 vicar
 vice
-vice-
 vices
 vide
 video
@@ -7136,7 +7094,6 @@ warts
 wary
 was
 wash
-wash-
 washy
 wasp
 wasps
@@ -7191,7 +7148,6 @@ weirs
 weld
 welds
 well
-well-
 wells
 welsh
 welt
@@ -7254,7 +7210,6 @@ whose
 whoso
 why
 whys
-wich-
 wick
 wicks
 wide
@@ -7390,7 +7345,6 @@ wroth
 wrung
 wry
 wryly
-wych-
 yacht
 yah
 yahoo
@@ -7434,8 +7388,7 @@ yetis
 yew
 yews
 yield
-yo-yo
-yob
+yobo
 yobo
 yobos
 yobs
