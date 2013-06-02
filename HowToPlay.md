@@ -38,7 +38,9 @@ The winner is the player with the highest score.
 
 ## Scoring
 
-Words in horizontal and vertical alignment score according to the following list. Only one word may score per row or column.
+Words in horizontal and vertical alignment score according to the following list. 
+
+Only one word may score per row or column.
 
 Score 3 points for each 3 letter word
 Score 4 points for each 4 letter word
