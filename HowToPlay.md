@@ -46,7 +46,7 @@ Score 5 points for each 5 letter word
 
 Example showing three, four and five point words to get a total of 39 points
 
-![Example scoring grid](example_scoring.png)
+![Example scoring grid](scoring_example.png)
 
 ### Additional Rules
 
