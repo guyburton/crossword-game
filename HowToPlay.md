@@ -13,7 +13,7 @@ Each player needs a sheet of paper and a pen.
 
 Each player should draw a 5x5 grid on their paper, with enough space to write a single letter in each cell.
 
-** Insert image here **
+![Empty grid example](empty_grid.png)
 
 ### The first turn
 
@@ -44,8 +44,9 @@ Score 3 points for each 3 letter word
 Score 4 points for each 4 letter word
 Score 5 points for each 5 letter word
 
-Example showing three, four and five point words.
+Example showing three, four and five point words to get a total of 39 points
 
+![Example scoring grid](example_scoring.png)
 
 ### Additional Rules
 
