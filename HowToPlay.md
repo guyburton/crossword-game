@@ -43,7 +43,9 @@ Words in horizontal and vertical alignment score according to the following list
 Only one word may score per row or column.
 
 Score 3 points for each 3 letter word
+
 Score 4 points for each 4 letter word
+
 Score 5 points for each 5 letter word
 
 Example showing three, four and five point words to get a total of 39 points
