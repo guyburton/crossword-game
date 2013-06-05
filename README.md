@@ -7,4 +7,5 @@ Let me know if you are interested in writing some strategies, it could be intere
 
 N.B A decent human score is around 30
 
-See HowToPlay.md for the full 'rules' of the game.
+See HowToPlay.md for the full 'rules' of the game:
+http://guyburton.github.io/crossword-game/HowToPlay.html
