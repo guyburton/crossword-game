@@ -12,7 +12,7 @@ title: The Crossword Game
 
 ### Before you start
 
-It's a game for 2-6 players. You can play with more, but it gets harder to play strategically.
+The Crossword Game is a game for 2-6 players. You can play with more, but it gets harder to play strategically.
 
 Each player needs a sheet of paper and a pen.
 
