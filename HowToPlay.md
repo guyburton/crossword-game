@@ -1,3 +1,8 @@
+---
+layout: post
+title: The Crossword Game 
+---
+
 # The Crossword Game
 
 **The Crossword Game** is an old game my family traditionally plays at Christmas time. It requires nothing but a handful of players, a few sheets of paper and some pens. Oh, and the ability to get along even when you are feeling seriously competitive!
